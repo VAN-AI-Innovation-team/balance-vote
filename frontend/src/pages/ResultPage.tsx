@@ -149,14 +149,6 @@ function ResultPage() {
 
         {question && <p className="result-question">{question}</p>}
 
-        <div className="result-total">
-          <span className="result-total-label">총 투표</span>
-          <strong className="result-total-value">
-            {result?.totalVotes ?? 0}
-          </strong>
-          <span className="result-total-unit">표</span>
-        </div>
-
         {resultLoading && result === null && (
           <p className="result-placeholder">집계를 불러오는 중입니다.</p>
         )}
