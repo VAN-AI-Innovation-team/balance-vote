@@ -45,18 +45,15 @@ function VoteRateBar({
   /*
    * 현재 화면에 그려진 값.
    *
-   * 기존에는 애니메이션이 '완료'될 때만 기준값을 갱신했다.
-   * 투표는 900ms 보다 훨씬 자주 들어오므로 새 목표값이 도착할 때마다
-   * 마지막으로 완료된 값에서 다시 출발했고, 그 결과 막대가 뒤로
-   * 튀었다가 다시 늘어나는 현상이 있었다.
-   * 매 프레임 실제 표시값을 기록해 항상 현재 위치에서 이어지게 한다.
+   * 새 목표값이 도착할 때마다 현재 표시 중인 값에서 이어서 애니메이션한다.
+   * 투표가 빠르게 갱신되어도 막대와 숫자가 0으로 되돌아가지 않는다.
    */
   const displayedRateRef = useRef(0)
   const displayedCountRef = useRef(0)
 
   useEffect(() => {
-    const startRate = 0
-    const startCount = 0
+    const startRate = displayedRateRef.current
+    const startCount = displayedCountRef.current
     const startTime = performance.now()
 
     let animationFrame = 0
